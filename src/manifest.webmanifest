@@ -1,6 +1,6 @@
 {
-  "name": "guess-the-number",
-  "short_name": "guess-the-number",
+  "name": "Guess The Number",
+  "short_name": "GuessTheNumber",
   "theme_color": "#fef6e4",
   "background_color": "#fef6e4",
   "display": "standalone",
