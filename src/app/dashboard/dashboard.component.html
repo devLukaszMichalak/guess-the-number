@@ -1,0 +1,13 @@
+<div class="w-100 h-100 d-flex align-items-center justify-content-center">
+  <div class="d-flex w-100 gap-5 flex-column align-items-center center-container-color pt-3 pb-3">
+    <h1><span class="badge bg-danger"><strong class="main-number-font">{{generatedNumber}}</strong></span></h1>
+
+    <div class="d-flex flex-row gap-1">
+      <button type="button" class="btn btn-lg higher-btn-color" (click)="checkHigher()"><strong>HIGHER</strong></button>
+      <button type="button" class="btn btn-lg lower-btn-color" (click)="checkLower()"><strong>LOWER</strong></button>
+    </div>
+
+    <h5><span class="badge bg-secondary counter-color">CURRENT STREAK: {{streak}}</span></h5>
+  </div>
+</div>
+
