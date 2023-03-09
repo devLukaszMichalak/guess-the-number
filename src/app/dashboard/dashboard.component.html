@@ -7,7 +7,11 @@
       <button type="button" class="btn btn-lg lower-btn-color" (click)="checkLower()"><strong>LOWER</strong></button>
     </div>
 
-    <h5><span class="badge bg-secondary counter-color">CURRENT STREAK: {{streak}}</span></h5>
+    <h5>
+      <div class="badge bg-secondary counter-color me-1" ngbTooltip="The point of the game is to guess weather the next number will be higher or lower than a current one. Streak counts how many times you were correct in a row." triggers="click:blur">
+      ?
+    </div>
+      <div class="badge bg-secondary counter-color ps-3">CURRENT STREAK: {{streak}} 🔥</div></h5>
   </div>
 </div>
 
