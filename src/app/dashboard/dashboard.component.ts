@@ -1,21 +1,31 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent implements OnInit, OnDestroy {
 
   public generatedNumber: number = -1;
+  public rollingNumber: number = 0;
   public streak: number = 0;
+
+  public areNumbersRolling: boolean = false;
+
+  private intervalId?: number;
+  private readonly NUMBER_OF_ROLLS: number = 10;
 
   ngOnInit(): void {
     this.generatedNumber = this.generateNumber(this.generatedNumber);
   }
 
-  public getNumberToDisplay = (): string => {
-    const currentNumberAsString = this.generatedNumber.toString();
+  ngOnDestroy(): void {
+    clearInterval(this.intervalId);
+  }
+
+  public getNumberToDisplay = (number: number): string => {
+    const currentNumberAsString = number.toString();
     const numberOfDigits = currentNumberAsString.length;
 
     switch (numberOfDigits) {
@@ -31,18 +41,29 @@ export class DashboardComponent implements OnInit {
   public checkHigher = (): void => {
     const oldNumber = this.generatedNumber;
     const newNumber = this.generateNumber(oldNumber);
+    this.rollNumbers((a, b) => a < b, oldNumber, newNumber);
     this.generatedNumber = newNumber;
-
-    newNumber > oldNumber ? this.streak++ : this.streak = 0;
-
   }
 
   public checkLower = (): void => {
     const oldNumber = this.generatedNumber;
     const newNumber = this.generateNumber(oldNumber);
+    this.rollNumbers((a, b) => a > b, oldNumber, newNumber);
     this.generatedNumber = newNumber;
+  }
 
-    newNumber < oldNumber ? this.streak++ : this.streak = 0;
+  private rollNumbers(compareFunc: (newNumber: number, oldNumber: number) => boolean, newNumber: number, oldNumber: number): void {
+    let counter: number = 0;
+    this.areNumbersRolling = true;
+    this.intervalId = setInterval(() => {
+      counter++;
+      this.rollingNumber = this.generateNumber(this.rollingNumber);
+      if (counter === this.NUMBER_OF_ROLLS) {
+        this.areNumbersRolling = false;
+        clearInterval(this.intervalId);
+        compareFunc(newNumber, oldNumber) ? this.streak++ : this.streak = 0;
+      }
+    }, 100);
   }
 
   private generateNumber = (currentNumber: number): number => {

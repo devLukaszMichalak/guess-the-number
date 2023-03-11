@@ -21,6 +21,11 @@
   font-size: 80px;
 }
 
+.disable-button {
+  pointer-events: none;
+  background-color: #fef6e4;
+}
+
 .number-container-size {
   width: 210px;
 }

@@ -1,10 +1,11 @@
 <div class="w-100 h-100 d-flex align-items-center justify-content-center">
   <div class="d-flex w-100 gap-5 flex-column align-items-center center-container-color pt-3 pb-3">
-    <h1><span class="badge bg-danger number-container-size"><strong class="main-number-font">{{getNumberToDisplay()}}</strong></span></h1>
+    <h1 *ngIf="!areNumbersRolling"><span class="badge bg-danger number-container-size"><strong class="main-number-font">{{getNumberToDisplay(generatedNumber)}}</strong></span></h1>
+    <h1 *ngIf="areNumbersRolling"><span class="badge bg-danger number-container-size"><strong class="main-number-font">{{getNumberToDisplay(rollingNumber)}}</strong></span></h1>
 
     <div class="d-flex flex-row gap-1">
-      <button type="button" class="btn btn-lg higher-btn-color" (click)="checkHigher()"><strong>HIGHER</strong></button>
-      <button type="button" class="btn btn-lg lower-btn-color" (click)="checkLower()"><strong>LOWER</strong></button>
+      <button [ngClass]="areNumbersRolling ? 'disable-button' : ''" type="button" class="btn btn-lg higher-btn-color" (click)="checkHigher()"><strong>HIGHER</strong></button>
+      <button [ngClass]="areNumbersRolling ? 'disable-button' : ''" type="button" class="btn btn-lg lower-btn-color" (click)="checkLower()"><strong>LOWER</strong></button>
     </div>
 
     <h5>
@@ -12,6 +13,7 @@
       ?
     </div>
       <div class="badge bg-secondary counter-color ps-3">CURRENT STREAK: {{streak}} 🔥</div></h5>
+
   </div>
 </div>
 
