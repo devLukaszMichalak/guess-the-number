@@ -12,6 +12,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   public streak: number = 0;
 
   public areNumbersRolling: boolean = false;
+  public shouldShowSadEffect: boolean = false;
 
   private intervalId?: number;
   private readonly NUMBER_OF_ROLLS: number = 10;
@@ -53,6 +54,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   private rollNumbers(compareFunc: (newNumber: number, oldNumber: number) => boolean, newNumber: number, oldNumber: number): void {
+    this.shouldShowSadEffect = false;
     let counter: number = 0;
     this.areNumbersRolling = true;
     this.intervalId = setInterval(() => {
@@ -61,7 +63,12 @@ export class DashboardComponent implements OnInit, OnDestroy {
       if (counter === this.NUMBER_OF_ROLLS) {
         this.areNumbersRolling = false;
         clearInterval(this.intervalId);
-        compareFunc(newNumber, oldNumber) ? this.streak++ : this.streak = 0;
+        if (compareFunc(newNumber, oldNumber)) {
+          this.streak++;
+        } else {
+          this.streak = 0;
+          this.shouldShowSadEffect = true;
+        }
       }
     }, 100);
   }

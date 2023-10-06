@@ -1,11 +1,11 @@
-<div class="w-100 h-100 d-flex align-items-center justify-content-center">
+<div class="w-100 h-100 d-flex align-items-center justify-content-center" [class.sad-page]="shouldShowSadEffect">
   <div class="d-flex w-100 gap-5 flex-column align-items-center center-container-color pt-3 pb-3">
     <h1 *ngIf="!areNumbersRolling"><span class="badge bg-danger number-container-size"><strong class="main-number-font">{{getNumberToDisplay(generatedNumber)}}</strong></span></h1>
     <h1 *ngIf="areNumbersRolling"><span class="badge bg-danger number-container-size"><strong class="main-number-font">{{getNumberToDisplay(rollingNumber)}}</strong></span></h1>
 
-    <div class="d-flex flex-row gap-1">
-      <button [ngClass]="areNumbersRolling ? 'disable-button' : ''" type="button" class="btn btn-lg higher-btn-color" (click)="checkHigher()"><strong>HIGHER</strong></button>
-      <button [ngClass]="areNumbersRolling ? 'disable-button' : ''" type="button" class="btn btn-lg lower-btn-color" (click)="checkLower()"><strong>LOWER</strong></button>
+    <div class="d-flex flex-row gap-2">
+      <button [ngClass]="areNumbersRolling ? 'disable-button' : ''" type="button" class="btn btn-lg higher-btn-color pop" (click)="checkHigher()"><strong>HIGHER</strong></button>
+      <button [ngClass]="areNumbersRolling ? 'disable-button' : ''" type="button" class="btn btn-lg lower-btn-color pop" (click)="checkLower()"><strong>LOWER</strong></button>
     </div>
 
     <h5>
