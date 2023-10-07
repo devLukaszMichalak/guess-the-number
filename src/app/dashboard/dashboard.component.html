@@ -9,11 +9,13 @@
     </div>
 
     <h5>
-      <div class="badge bg-secondary counter-color me-1 pointer" ngbTooltip="The point of the game is to guess weather the next number will be higher or lower than a current one. Streak counts how many times you were correct in a row." triggers="click:blur">
+      <span class="badge bg-secondary counter-color me-1 pointer" ngbTooltip="The point of the game is to guess weather the next number will be higher or lower than a current one. Streak counts how many times you were correct in a row." triggers="click:blur">
       ?
-    </div>
-      <div class="badge bg-secondary counter-color ps-3">CURRENT STREAK: {{streak}} 🔥</div></h5>
+    </span>
+      <span class="badge bg-secondary counter-color ps-3">CURRENT STREAK: {{streak}} 🔥</span>
+    </h5>
 
   </div>
 </div>
 
+<div *ngIf="!areNumbersRolling && streak !== 0" class="success">{{getEmojiForSuccess()}}</div>
