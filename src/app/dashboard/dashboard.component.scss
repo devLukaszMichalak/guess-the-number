@@ -68,7 +68,7 @@
 
 .success {
   position: absolute;
-  left: 50vw;
+  left: calc(50vw - 5px);
   top: 20vh;
   animation: success 1s;
   opacity: 0;
